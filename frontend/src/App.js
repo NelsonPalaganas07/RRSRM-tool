@@ -8,7 +8,7 @@ const Predictor = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('api/predict', {
+      const response = await axios.post('/api/predict', {
         user_story: userStory
       });
       setPrediction(response.data.prediction);
