@@ -3,16 +3,24 @@ import joblib
 from transformers import BertTokenizer, BertModel
 import numpy as np
 from flask_cors import CORS
+import os
 
 app = Flask(__name__)
 CORS(app)
 
+# Define the base directory
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# Define paths to model files
+SVC_MODEL_PATH = os.path.join(BASE_DIR, 'models/svc_model.joblib')
+TOKENIZER_PATH = os.path.join(BASE_DIR, 'models/saved_bert_model')
+
 # Load models
-svc_model = joblib.load('/Users/jaypalaganas/Desktop/STUDY_FILES/4th year, Sem2/R&D2/RRSRM-tool/api/backend/SVC Improved/svc_model.joblib')
+svc_model = joblib.load(SVC_MODEL_PATH)
 
 # Initialize BERT
-tokenizer = BertTokenizer.from_pretrained('/Users/jaypalaganas/Desktop/STUDY_FILES/4th year, Sem2/R&D2/RRSRM-tool/api/backend/SVC Improved/models/saved_bert_model')
-bert_model = BertModel.from_pretrained('/Users/jaypalaganas/Desktop/STUDY_FILES/4th year, Sem2/R&D2/RRSRM-tool/api/backend/SVC Improved/models/saved_bert_model')
+tokenizer = BertTokenizer.from_pretrained(TOKENIZER_PATH)
+bert_model = BertModel.from_pretrained(TOKENIZER_PATH)
 
 def extract_features(user_story):
     inputs = tokenizer(user_story, return_tensors='pt', padding=True, truncation=True)
