@@ -8,11 +8,11 @@ app = Flask(__name__)
 CORS(app)
 
 # Load models
-svc_model = joblib.load('/Users/jaypalaganas/Desktop/STUDY_FILES/4th year, Sem2/R&D2/RRSRM-tool/backend/SVC Improved/svc_model.joblib')
+svc_model = joblib.load('/Users/jaypalaganas/Desktop/STUDY_FILES/4th year, Sem2/R&D2/RRSRM-tool/api/backend/SVC Improved/svc_model.joblib')
 
 # Initialize BERT
-tokenizer = BertTokenizer.from_pretrained('/Users/jaypalaganas/Desktop/STUDY_FILES/4th year, Sem2/R&D2/RRSRM-tool/backend/SVC Improved/models/saved_bert_model')
-bert_model = BertModel.from_pretrained('/Users/jaypalaganas/Desktop/STUDY_FILES/4th year, Sem2/R&D2/RRSRM-tool/backend/SVC Improved/models/saved_bert_model')
+tokenizer = BertTokenizer.from_pretrained('/Users/jaypalaganas/Desktop/STUDY_FILES/4th year, Sem2/R&D2/RRSRM-tool/api/backend/SVC Improved/models/saved_bert_model')
+bert_model = BertModel.from_pretrained('/Users/jaypalaganas/Desktop/STUDY_FILES/4th year, Sem2/R&D2/RRSRM-tool/api/backend/SVC Improved/models/saved_bert_model')
 
 def extract_features(user_story):
     inputs = tokenizer(user_story, return_tensors='pt', padding=True, truncation=True)
