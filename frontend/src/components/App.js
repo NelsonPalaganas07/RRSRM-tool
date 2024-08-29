@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import AppCSS from './App.module.css';
+import Result from './Result.js';
 
 const Predictor = () => {
   const [userStory, setUserStory] = useState('');
   const [prediction, setPrediction] = useState(null);
+  const [activeTab, setActiveTab] = useState('result');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,15 +32,32 @@ const Predictor = () => {
       <textarea
         value={userStory}
         onChange={(e) => setUserStory(e.target.value)}
-        rows="4"
+        rows="6"
         cols="50"
       />
     </label>
     <button type="submit">Predict</button>
   </form>
-  {prediction !== null && <div>Prediction: {prediction}</div>}
   </div>
-  
+  {prediction !== null && (
+        <nav className={AppCSS.nav}>
+          <ul>
+            <li className={activeTab === 'result' ? AppCSS.active : ''}>
+              <button onClick={() => setActiveTab('result')}>Result</button>
+            </li>
+            <li className={activeTab === 'suggestions' ? AppCSS.active : ''}>
+              <button onClick={() => setActiveTab('suggestions')}>Suggestions</button>
+            </li>
+          </ul>
+        </nav>
+      )}
+
+      {prediction !== null && (
+        <div>
+          {activeTab === 'result' && <Result prediction={prediction} />}
+          {/* {activeTab === 'suggestions' && <Suggestions prediction={prediction} />} */}
+        </div>
+      )}
 </div>
   );
 };
