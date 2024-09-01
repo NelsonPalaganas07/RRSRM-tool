@@ -1,8 +1,8 @@
-Flask==2.2.5
-joblib==1.2.0
-transformers==4.29.0
-numpy==1.24.3
-flask-cors==3.0.10
-werkzeug==2.2.2
-flask-sqlalchemy==3.1.1
-scikit-learn==1.2.2
+Flask
+joblib
+transformers
+numpy
+flask-cors
+werkzeug
+flask-sqlalchemy
+scikit-learn
