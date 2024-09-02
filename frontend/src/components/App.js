@@ -31,6 +31,7 @@ const Predictor = () => {
       Enter User Story:
       <textarea
         value={userStory}
+        
         onChange={(e) => setUserStory(e.target.value)}
         rows="6"
         cols="50"

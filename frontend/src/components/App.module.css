@@ -83,7 +83,7 @@ button:hover {
     background-color: #78006a;
   }
   
-  /* .active button {
+  .active button {
     background-color: #333;
     color: white;
-  } */
+  }
