@@ -10,7 +10,7 @@ const Predictor = () => {
   const [suggestions, setSuggestions] = useState(null);
   const [activeTab, setActiveTab] = useState('result');
   const [isFetchingSuggestions, setIsFetchingSuggestions] = useState(false);
-  const [hasFetchedSuggestions, setHasFetchedSuggestions] = useState(false); // Track if suggestions have been fetched
+  const [hasFetchedSuggestions, setHasFetchedSuggestions] = useState(false);
 
   // Function to fetch suggestions
   const fetchSuggestions = async () => {
@@ -20,7 +20,7 @@ const Predictor = () => {
         user_story: userStory,
       });
       setSuggestions(response.data.suggestions);
-      setHasFetchedSuggestions(true); // Mark that suggestions have been fetched
+      setHasFetchedSuggestions(true);
     } catch (error) {
       console.error('Error fetching suggestions:', error);
     } finally {
@@ -32,15 +32,13 @@ const Predictor = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Get prediction
       const response = await axios.post('http://127.0.0.1:5000/predict', {
         user_story: userStory,
       });
       setPrediction(response.data.prediction);
-
       // Reset suggestions when a new prediction is made
       setSuggestions(null);
-      setHasFetchedSuggestions(false); // Reset fetched suggestions flag
+      setHasFetchedSuggestions(false);
       setIsFetchingSuggestions(false);
     } catch (error) {
       console.error('Error making prediction:', error);
@@ -86,15 +84,12 @@ const Predictor = () => {
             </li>
             {prediction === 0 && (
               <li className={activeTab === 'suggestions' ? AppCSS.active : ''}>
-                <button onClick={() => setActiveTab('suggestions')}>
-                  Suggestions
-                </button>
+                <button onClick={() => setActiveTab('suggestions')}>Suggestions</button>
               </li>
             )}
           </ul>
         </nav>
       )}
-
       {prediction !== null && (
         <div>
           {activeTab === 'result' && <Result prediction={prediction} />}
