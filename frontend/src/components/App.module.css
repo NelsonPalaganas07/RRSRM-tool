@@ -13,6 +13,13 @@ body {
     color: white;
 }
 
+.loading {
+    font-size: 16px;
+    color: #555;
+    text-align: center;
+    margin-top: 20px;
+}
+
 .container {
     background-color: rgb(37, 37, 37);
     display: flex;
@@ -57,33 +64,30 @@ button:hover {
     background-color: #78006a; 
 }
 
-
-
-
 .nav ul {
     list-style-type: none;
     padding: 0;
     margin: 20px 0;
     display: flex;
     gap: 10px;
-  }
-  
-  .nav ul li {
+}
+
+.nav ul li {
     display: inline;
-  }
-  
-  .nav ul li button {
+}
+
+.nav ul li button {
     background-color: #b3009e;
     border: 1px solid #ccc;
     padding: 10px 20px;
     cursor: pointer;
-  }
-  
-  .nav ul li button:hover {
+}
+
+.nav ul li button:hover {
     background-color: #78006a;
-  }
-  
-  .active button {
+}
+
+.active button {
     background-color: #333;
     color: white;
-  }
+}
