@@ -10,12 +10,25 @@ from langchain_core.prompts import PromptTemplate
 app = Flask(__name__)
 CORS(app)
 
+#Reassemble code
+def reassemble_model(chunks_dir, output_file_name):
+    output_file = os.path.join(chunks_dir, output_file_name)
+    
+    with open(output_file, 'wb') as f_out:
+        for chunk_file in sorted(os.listdir(chunks_dir)):
+            if chunk_file.startswith('chunkmodel'):  # Chunk file name
+                with open(os.path.join(chunks_dir, chunk_file), 'rb') as f_in:
+                    f_out.write(f_in.read())
+
 # Define the base directory
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # Define paths to model files
 SVC_MODEL_PATH = os.path.join(BASE_DIR, 'models/svc_model.joblib')
 TOKENIZER_PATH = os.path.join(BASE_DIR, 'models/saved_bert_model')
+
+#Reassemble model before loading
+reassemble_model(TOKENIZER_PATH, 'model.safetensors')
 
 # Load models
 svc_model = joblib.load(SVC_MODEL_PATH)

@@ -15,6 +15,9 @@
 # Ignore environment variables file (if any)
 .env
 
+#Ignore venv directory
+venv/
+
 # Ignore log files
 *.log
 
