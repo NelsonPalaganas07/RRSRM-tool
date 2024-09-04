@@ -1,0 +1,51 @@
+name: GitHub Actions Test
+
+on:
+  push:
+    branches: [ "main", "develop" ]
+  pull_request:
+    branches: [ "main", "develop" ]
+  workflow_dispatch:  # Allows manual triggering of the workflow
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the code from the repository
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Set up Node.js (React project)
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '14'  # Adjust Node.js version if needed
+
+      # Install dependencies for React project
+      - name: Install dependencies (React)
+        run: npm install
+        working-directory: ./frontend  # Adjust if your React app is in a subdirectory
+
+      # Run tests for React project
+      - name: Run tests (React)
+        run: npm run test:ci
+        working-directory: ./frontend  # Adjust if your React app is in a subdirectory
+
+      # Set up Python (Flask project)
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'  # Adjust Python version if needed
+
+      # Install dependencies for Flask project
+      - name: Install dependencies (Flask)
+        run: |
+          pip install -r requirements.txt
+        working-directory: ./api  # Adjust if your Flask app is in a subdirectory
+
+      # Run tests for Flask project
+      - name: Run tests (Flask)
+        run: |
+          pytest  # Or any other command to run your Flask tests
+        working-directory: ./api  # Adjust if your Flask app is in a subdirectory
