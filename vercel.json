@@ -7,7 +7,7 @@
         "config": { "memory": 2048 }
       },
       {
-        "src": "frontend/build/**/*",
+        "src": "/build/**/*",
         "use": "@vercel/static"
       }
     ],
@@ -18,7 +18,7 @@
       },
       {
         "src": "/(.*)",
-        "dest": "/frontend/build/$1"
+        "dest": "/build/$1"
       }
     ]
   }
