@@ -1,8 +1,8 @@
 # Ignore node_modules in frontend
-/frontend/node_modules/
+node_modules/
 
 # Ignore build output from React frontend
-/frontend/build/
+build/
 
 # Ignore Python virtual environment in backend
 /backend/venv/
@@ -16,6 +16,9 @@
 /backend/__pycache__/
 *.pyc
 *.pyo
+*.pyd
+*.db
+*.sqlite3
 
 # Ignore environment variables file (if any)
 .env
@@ -30,3 +33,7 @@ venv/
 .DS_Store
 *.swp
 .vercel
+
+# IDE/editor specific files
+.vscode/
+.idea/
