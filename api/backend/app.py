@@ -7,7 +7,7 @@ import os
 from langchain_community.llms import Ollama
 from langchain_core.prompts import PromptTemplate
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='frontend/build', static_url_path='')
 CORS(app)
 
 #Reassemble code
