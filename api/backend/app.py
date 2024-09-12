@@ -43,8 +43,9 @@ def get_llm_suggestions(user_story):
         template="""
         You are an expert in improving user stories for software development. I need your help to make the following user story clearer and more actionable. 
 
-        1. Review the user story for any ambiguous or unclear elements.
-        2. Provide specific suggestions to make it more precise and unambiguous.
+        
+        Review the user story for any ambiguous or unclear elements.
+        Provide specific suggestions to make it more precise and unambiguous.
 
         Here is the user story:
 
@@ -52,12 +53,9 @@ def get_llm_suggestions(user_story):
 
         Please ensure that your suggestions address any potential ambiguities and provide actionable steps to enhance the clarity and effectiveness of the user story. 
 
-        Your response should include:
-        - A summary of any ambiguities or unclear elements found in the user story.
-        - Detailed recommendations for rewriting or improving the user story.
-        - Additional tips or best practices for writing clear and actionable user stories.
-
-        Thank you!
+        Please generate a user story and provide suggestions for improvement in the following format:
+        Recommended User Story: [your user story here]
+        Suggestions: [your suggestions here]
         """
     )
     
