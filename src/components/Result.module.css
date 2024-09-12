@@ -1,18 +1,42 @@
-.h2succ{
+  .h2succ {
     color: rgb(38, 142, 38);
-}
-
-.h2fail{
+  }
+  
+  .h2fail {
     color: rgb(200, 19, 19);
-}
-
-.card{
-    background-color: rgb(37, 37, 37);
-    padding: 20px;
+  }
+  
+  .resultItem {
+    margin-bottom: 10px;
+    position: relative;
+  }
+  
+  /* Definition designs */
+  .questionMark {
     color: white;
-    width: 500px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
-    border-radius: 8px;
-    border: 0.5px solid white;
-    gap: 20px;   
-}
+    font-size: 12px; 
+    font-weight: bold;
+    margin-left: 5px;
+    cursor: pointer;
+    border: 1px solid white;
+    border-radius: 50%;
+    padding: 2px 5px;
+    display: inline-block;
+    text-align: center;
+    line-height: 1.2;
+  }
+  
+  .definition {
+    padding: 5px;
+    border: 1px solid #ccc;
+    background-color: #000000;
+    color: #fff; 
+    border-radius: 4px;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 10;
+    max-width: 450px; 
+    font-size: 15px;
+  }
+  

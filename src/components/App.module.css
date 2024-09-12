@@ -45,11 +45,13 @@ form {
     gap: 20px;
 }
 
+/* Style for textarea */
 textarea {         
-    width: 110%;
+    width: 100%; 
     align-self: center;
 }
 
+/* Style for buttons */
 button {
     align-self: flex-start; 
     padding: 10px 20px;     
@@ -64,30 +66,71 @@ button:hover {
     background-color: #78006a; 
 }
 
+/* Design for some UI animation of navigation tab */
+.nav {
+    margin: 20px 0;
+}
+
 .nav ul {
     list-style-type: none;
     padding: 0;
-    margin: 20px 0;
+    margin: 0;
     display: flex;
     gap: 10px;
+    color: white;
 }
 
 .nav ul li {
     display: inline;
 }
 
-.nav ul li button {
-    background-color: #b3009e;
-    border: 1px solid #ccc;
+.tab {
     padding: 10px 20px;
     cursor: pointer;
+    position: relative;
 }
 
-.nav ul li button:hover {
-    background-color: #78006a;
+.tab::after {
+    content: '';
+    display: block;
+    height: 2px;
+    background: #b3009e;
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    right: 0;
+    transform: scaleX(0);
+    transform-origin: bottom right;
+    transition: transform 0.3s ease;
 }
 
-.active button {
-    background-color: #333;
-    color: white;
+.active .tab::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
 }
+
+.error {
+    color: #ff4d4d;
+}
+
+/* Criteria designs */
+.criteriaSection {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; 
+}
+
+.criteriaItem {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px; 
+}
+
+.criteriaItem input[type="checkbox"] {
+    margin: 0; 
+}
+
+.criteriaItem label {
+    margin: 0;
+}
+

@@ -5,14 +5,31 @@ import Result from './Result';
 import Suggestions from './Suggestions';
 
 const Predictor = () => {
+  //Variable declarations
   const [userStory, setUserStory] = useState('');
   const [prediction, setPrediction] = useState(null);
   const [suggestions, setSuggestions] = useState(null);
   const [activeTab, setActiveTab] = useState('result');
   const [isFetchingSuggestions, setIsFetchingSuggestions] = useState(false);
   const [hasFetchedSuggestions, setHasFetchedSuggestions] = useState(false);
+  const [checkboxes, setCheckboxes] = useState({
+    Unambiguous: false,
+    'Well-formed': false,
+    'Full Sentence': false,
+  });
+  const [selectedCriteria, setSelectedCriteria] = useState([]);
+  const [errorMessage, setErrorMessage] = useState('');
 
-  // Function to fetch suggestions
+  //function to handle checkbox interactions
+  const handleCheckboxChange = (event) => {
+    const { name, checked } = event.target;
+    setCheckboxes((prev) => ({
+      ...prev,
+      [name]: checked,
+    }));
+  };
+
+  //Function to fetch suggestions via api and populates corresponding variables.
   const fetchSuggestions = async () => {
     setIsFetchingSuggestions(true);
     try {
@@ -28,15 +45,25 @@ const Predictor = () => {
     }
   };
 
-  // Handle prediction submit
+  //Function to handle evaluate button
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!userStory.trim()) {
+      setErrorMessage('Please enter a user story before submitting.');
+      return;
+    }
+
+    //Sets error messages
+    setErrorMessage('');
+    const selected = Object.keys(checkboxes).filter((key) => checkboxes[key]);
+    setSelectedCriteria(selected);
+
     try {
       const response = await axios.post('http://127.0.0.1:5000/predict', {
         user_story: userStory,
       });
       setPrediction(response.data.prediction);
-      // Reset suggestions when a new prediction is made
       setSuggestions(null);
       setHasFetchedSuggestions(false);
       setIsFetchingSuggestions(false);
@@ -45,7 +72,7 @@ const Predictor = () => {
     }
   };
 
-  // Effect to fetch suggestions when necessary
+  //Loading animation?
   useEffect(() => {
     if (activeTab === 'suggestions' && prediction === 0 && !hasFetchedSuggestions) {
       fetchSuggestions();
@@ -53,11 +80,12 @@ const Predictor = () => {
   }, [activeTab, prediction, hasFetchedSuggestions]);
 
   return (
-    <div>
+    <div className={AppCSS.wrapper}>
       <div className={AppCSS.title}>
-        <h1>USER STORY PREDICTOR</h1>
+        <h1>USER STORY QUALITY EVALUATION</h1>
       </div>
       <div className={AppCSS.container}>
+        {/* Textarea field for user story inputs */}
         <form onSubmit={handleSubmit}>
           <label>
             Enter User Story:
@@ -68,23 +96,67 @@ const Predictor = () => {
               cols="50"
             />
           </label>
+          {errorMessage && <p className={AppCSS.error}>{errorMessage}</p>}
+          {/* Quality criteria checkboxes */}
+          <label>Quality Criteria:</label>
+          <div className={AppCSS.criteriaSection}>
+            <div className={AppCSS.criteriaItem}>
+              <input
+                type="checkbox"
+                name="Unambiguous"
+                checked={checkboxes.Unambiguous}
+                onChange={handleCheckboxChange}
+              />
+              <label>Unambiguous</label>
+            </div>
+            <div className={AppCSS.criteriaItem}>
+              <input
+                type="checkbox"
+                name="Well-formed"
+                checked={checkboxes['Well-formed']}
+                onChange={handleCheckboxChange}
+              />
+              <label>Well-formed</label>
+            </div>
+            <div className={AppCSS.criteriaItem}>
+              <input
+                type="checkbox"
+                name="Full Sentence"
+                checked={checkboxes['Full Sentence']}
+                onChange={handleCheckboxChange}
+              />
+              <label>Full Sentence</label>
+            </div>
+          </div>
+          {/* Evaluate button */}
           <button
             type="submit"
-            disabled={isFetchingSuggestions} // Disable if fetching suggestions
+            disabled={isFetchingSuggestions}
           >
-            Predict
+            Evaluate
           </button>
         </form>
       </div>
+      {/* This section is a navigation to evaluation result and suggestions */}
       {prediction !== null && (
         <nav className={AppCSS.nav}>
           <ul>
             <li className={activeTab === 'result' ? AppCSS.active : ''}>
-              <button onClick={() => setActiveTab('result')}>Result</button>
+              <span
+                className={AppCSS.tab}
+                onClick={() => setActiveTab('result')}
+              >
+                Evaluation Result
+              </span>
             </li>
             {prediction === 0 && (
               <li className={activeTab === 'suggestions' ? AppCSS.active : ''}>
-                <button onClick={() => setActiveTab('suggestions')}>Suggestions</button>
+                <span
+                  className={AppCSS.tab}
+                  onClick={() => setActiveTab('suggestions')}
+                >
+                  Suggestions
+                </span>
               </li>
             )}
           </ul>
@@ -92,7 +164,9 @@ const Predictor = () => {
       )}
       {prediction !== null && (
         <div>
-          {activeTab === 'result' && <Result prediction={prediction} />}
+          {activeTab === 'result' && (
+            <Result prediction={prediction} selectedCriteria={selectedCriteria} />
+          )}
           {activeTab === 'suggestions' && (
             <Suggestions
               suggestions={suggestions}
