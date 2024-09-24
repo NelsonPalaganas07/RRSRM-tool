@@ -1,0 +1,42 @@
+  .h2succ {
+    color: rgb(38, 142, 38);
+  }
+  
+  .h2fail {
+    color: rgb(200, 19, 19);
+  }
+  
+  .resultItem {
+    margin-bottom: 10px;
+    position: relative;
+  }
+  
+  /* Definition designs */
+  .questionMark {
+    color: white;
+    font-size: 12px; 
+    font-weight: bold;
+    margin-left: 5px;
+    cursor: pointer;
+    border: 1px solid white;
+    border-radius: 50%;
+    padding: 2px 5px;
+    display: inline-block;
+    text-align: center;
+    line-height: 1.2;
+  }
+  
+  .definition {
+    padding: 5px;
+    border: 1px solid #ccc;
+    background-color: #000000;
+    color: #fff; 
+    border-radius: 4px;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 10;
+    max-width: 450px; 
+    font-size: 15px;
+  }
+  

@@ -1,0 +1,136 @@
+body {
+    background-color: hsl(0, 0%, 8%);
+    margin: 0; 
+    font-family: Arial, sans-serif; 
+    display: flex;
+    justify-content: center;  /* Centers the container horizontally */
+    align-items: center;      /* Centers the container vertically */
+}
+
+.title {
+    text-align: center;
+    padding: 50px;
+    color: white;
+}
+
+.loading {
+    font-size: 16px;
+    color: #555;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.container {
+    background-color: rgb(37, 37, 37);
+    display: flex;
+    flex-direction: column;
+    padding: 50px;
+    color: white;
+    width: 600px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    border-radius: 8px;
+    border: 0.5px solid white;
+    gap: 20px;        
+}
+
+label {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+form {           
+    display: flex;
+    flex-direction: column; 
+    gap: 20px;
+}
+
+/* Style for textarea */
+textarea {         
+    width: 100%; 
+    align-self: center;
+}
+
+/* Style for buttons */
+button {
+    align-self: flex-start; 
+    padding: 10px 20px;     
+    background-color: #b3009e;  
+    color: white;                    
+    border-radius: 4px;
+    border: 1px solid #ccc;     
+    cursor: pointer;        
+}
+
+button:hover {
+    background-color: #78006a; 
+}
+
+/* Design for some UI animation of navigation tab */
+.nav {
+    margin: 20px 0;
+}
+
+.nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 10px;
+    color: white;
+}
+
+.nav ul li {
+    display: inline;
+}
+
+.tab {
+    padding: 10px 20px;
+    cursor: pointer;
+    position: relative;
+}
+
+.tab::after {
+    content: '';
+    display: block;
+    height: 2px;
+    background: #b3009e;
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    right: 0;
+    transform: scaleX(0);
+    transform-origin: bottom right;
+    transition: transform 0.3s ease;
+}
+
+.active .tab::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+.error {
+    color: #ff4d4d;
+}
+
+/* Criteria designs */
+.criteriaSection {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; 
+}
+
+.criteriaItem {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px; 
+}
+
+.criteriaItem input[type="checkbox"] {
+    margin: 0; 
+}
+
+.criteriaItem label {
+    margin: 0;
+}
+
